@@ -59,7 +59,7 @@ class Order(BaseModel):
         verbose_name=_("product")
     )
     quantity = models.PositiveIntegerField(
-        validators=[MinValueValidator(0), ],
+        validators=[MinValueValidator(1), ],
         verbose_name=_("quantity")
     )
 
