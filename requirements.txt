@@ -1,0 +1,10 @@
+wheel
+Pillow==8.2.0
+Django==2.2.24
+djangorestframework==3.12.4
+django-rest-auth==0.9.5
+django-restql==0.13.1
+django-filter==2.4.0
+drf-yasg==1.20.0
+drf-yasg[validation]
+python-decouple==3.4
