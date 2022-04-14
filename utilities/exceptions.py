@@ -6,4 +6,4 @@ class Http400(APIException):
 
 
 class Http404(APIException):
-    status_code = 404
+    status_code = 402
