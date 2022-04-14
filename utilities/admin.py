@@ -12,4 +12,4 @@ class BaseAdmin(admin.ModelAdmin):
                            format(obj.id, _('update'), obj.id, _('delete')))
 
     manage_buttons.short_description = _('Manage')
-    manage_buttons.allow_tags = True
+    manage_buttons.allow_tags = False
