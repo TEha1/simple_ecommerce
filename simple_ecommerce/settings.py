@@ -83,13 +83,17 @@ WSGI_APPLICATION = 'simple_ecommerce.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": config("DATABASE_NAME_PSQL", cast=str),
+        "USER": config("DATABASE_USER_PSQL", cast=str),
+        "PASSWORD": config("DATABASE_PASSWORD_PSQL", cast=str),
+        "HOST": config("DATABASE_URL_PSQL", cast=str),
+        "PORT": config("DATABASE_PORT_PSQL", cast=str),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
