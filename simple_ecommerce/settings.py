@@ -135,17 +135,18 @@ USE_TZ = True
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale'), ]
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-STATIC_URL = '/static/'
-# https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = BASE_DIR + "/static/"
-# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
-#STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
-# https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = BASE_DIR + "/media/"
-# https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # DRF configurations
 REST_FRAMEWORK = {
