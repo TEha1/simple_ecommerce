@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
-    "modeltranslation",
     # django default apps
     'django.contrib.admin',
     'django.contrib.auth',
