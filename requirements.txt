@@ -1,6 +1,6 @@
 wheel
 Pillow==8.2.0
-Django==2.2.24
+Django==3.2.10
 djangorestframework==3.12.4
 django-rest-auth==0.9.5
 django-restql==0.13.1
