@@ -28,31 +28,37 @@ from rest_framework.permissions import AllowAny
 schema_view = get_schema_view(
     openapi.Info(
         title="Simple E-Commerce API",
-        default_version='v1',
+        default_version="v1",
     ),
     public=True,
     permission_classes=(AllowAny,),
 )
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', admin.site.urls),
-    path('api/v1/', include('users.api.v1.urls')),
-    path('api/v1/', include('core.api.v1.urls')),
+urlpatterns = (
+    [
+        # swagger
+        path(
+            "redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
+        ),
+        re_path(
+            r"^swagger(?P<format>\.json|\.yaml)$",
+            schema_view.without_ui(cache_timeout=0),
+            name="schema-json",
+        ),
+        re_path(
+            r"^swagger/$",
+            schema_view.with_ui("swagger", cache_timeout=0),
+            name="schema-swagger-ui",
+        ),
+        path("admin/", admin.site.urls),
+        path("", admin.site.urls),
+        path("api/v1/", include("users.api.v1.urls")),
+        path("api/v1/", include("core.api.v1.urls")),
+    ],
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
+)
 
-    # swagger
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-else:
-    urlpatterns += [
-        url(r'^media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT})
-    ]
-
-admin.site.site_header = _('Simple E-Commerce admin panel')
-admin.site.site_title = _('Simple E-Commerce admin panel')
-admin.site.index_title = _('Welcome to Simple E-Commerce admin panel')
+admin.site.site_header = _("Simple E-Commerce admin panel")
+admin.site.site_title = _("Simple E-Commerce admin panel")
+admin.site.index_title = _("Welcome to Simple E-Commerce admin panel")
 admin.site.site_url = False
