@@ -116,3 +116,4 @@ venv.bak/
 # media
 media/
 staticfiles/
+.env
