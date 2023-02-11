@@ -16,10 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.views.static import serve
 from django.urls import path, include, re_path
-from django.conf.urls import url
 from django.utils.translation import gettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
@@ -53,7 +50,7 @@ urlpatterns = (
         path("", admin.site.urls),
         path("api/v1/", include("users.api.v1.urls")),
         path("api/v1/", include("core.api.v1.urls")),
-    ],
+    ]
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 )
