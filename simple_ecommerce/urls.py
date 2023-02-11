@@ -17,7 +17,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.static import serve
 from django.urls import path, include, re_path
+from django.conf.urls import url
 from django.utils.translation import gettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
@@ -42,7 +44,13 @@ urlpatterns = [
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + staticfiles_urlpatterns()
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT})
+    ]
 
 admin.site.site_header = _('Simple E-Commerce admin panel')
 admin.site.site_title = _('Simple E-Commerce admin panel')
