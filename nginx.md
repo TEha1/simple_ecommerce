@@ -127,7 +127,7 @@ $ sudo systemctl restart gunicorn
 $ sudo nano /etc/nginx/sites-available/myproject
 ```
 
-```
+```editorconfig
 server {
     # add here the ip address of your server
     # or a domain pointing to that ip (like example.com or www.example.com)
